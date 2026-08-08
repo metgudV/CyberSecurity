@@ -1,16 +1,23 @@
-import streamlit as st, pandas as pd, paho.mqtt.client as mqtt, json, pickle, time, random
+def verify_signature(payload):
+    data_string = f"{payload['Thrust']}_{payload['Torque']}_{payload['Status']}_{payload['Transaction_ID']}"
+    expected_sig = hmac.new(SECRET_KEY, data_string.encode(), hashlib.sha256).hexdigest()
+    return hmac.compare_digest(expected_sig, payload.get("Signature", ""))
 
-st.title("Aerospace Assembly: ML Anomaly Detection")
-model = pickle.load(open('isolation_forest.pkl', 'rb'))
-telemetry_data = []
-
-def on_message(client, userdata, msg):
-    payload = json.loads(msg.payload.decode())
-    df_current = pd.DataFrame([payload])
-    prediction = model.predict(df_current[['Thrust', 'Torque']])[0]
-    
-    if prediction == -1 and payload.get("Status") == "PASS":
-        payload["Security_Alert"] = "COMPROMISED"
+# Added inside on_message for Layered Defense:
+if tx_id in state["seen_tx"]:
+    payload["Security_Alert"] = "🚨 BLOCKED: Replay Attack"
+else:
+    state["seen_tx"].add(tx_id)
+    if not verify_signature(payload):
+        payload["Security_Alert"] = "🚨 BLOCKED: Invalid Signature (Tampering)"
     else:
-        payload["Security_Alert"] = "SAFE"
-    telemetry_data.append(payload)
+        # ML check happens here
+
+# Added UI Metrics:
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("Total Logs", state["stats"]["Total"])
+col2.metric("Replay Blocked", state["stats"]["Replay"])
+col3.metric("Tamper Blocked", state["stats"]["Tamper"])
+col4.metric("Insider Detected", state["stats"]["Insider"])
+
+
