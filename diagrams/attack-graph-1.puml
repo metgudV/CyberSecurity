@@ -1,0 +1,27 @@
+@startuml
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #F8F9FA
+    BorderColor #333333
+}
+
+title MITRE-Aligned Attack Graph 1: Airbus MQTT Topic Spoofing (Tampering)
+
+start
+:Reconnaissance: Sniff unencrypted MQTT topics on Airbus factory floor;
+:Initial Access: Compromise maintenance laptop connected to local network;
+:Collection: Observe standard telemetry JSON structure (Thrust/Torque);
+:Execution: Intercept 'FAIL' smart tool telemetry;
+:Action on Objectives: Modify 'FAIL' value to 'PASS' to bypass QA;
+:Action on Objectives: Publish spoofed payload to broker;
+
+note right
+  **Detection Control:** 
+  Layer 2 Crypto Verifier catches invalid 
+  HMAC signature because the attacker 
+  does not possess the Airbus secret key.
+end note
+
+stop
+@enduml
