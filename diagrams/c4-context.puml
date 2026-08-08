@@ -1,0 +1,26 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+LAYOUT_WITH_LEGEND()
+
+title C4 Level 1 System Context: Aerospace Assembly Telemetry Platform
+
+Person(qaEngineer, "QA & Security Engineer", "Monitors structural integrity passes and live security threats.")
+System(telemetryPlatform, "Aerospace Telemetry Defense Platform", "Secures, validates, and analyzes high-frequency tool telemetry for tampering.")
+
+System_Ext(smartTools, "Smart Assembly Tools", "Generates raw Thrust & Torque telemetry on the factory floor.")
+System_Ext(mes, "Manufacturing Execution System (MES)", "Enterprise system logging official QA passes for aircraft assembly.")
+System_Ext(aviationAudit, "Aviation Safety Auditing System", "Regulatory system storing immutable logs of tool failures and QA passes.")
+
+Rel(qaEngineer, telemetryPlatform, "Monitors threats and telemetry via", "HTTPS")
+Rel(smartTools, telemetryPlatform, "Sends signed telemetry data", "MQTT / Local Network")
+Rel(telemetryPlatform, mes, "Forwards validated QA logs", "REST API")
+Rel(telemetryPlatform, aviationAudit, "Sends security incident reports", "Secure API")
+
+Boundary(trustBoundary, "Enterprise Trust Boundary") {
+    Note right of telemetryPlatform
+      Trust Boundary: Separates untrusted 
+      factory floor devices from the 
+      enterprise MES and Audit systems.
+    End note
+}
+@enduml
