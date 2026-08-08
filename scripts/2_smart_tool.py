@@ -1,16 +1,17 @@
-import time, json, random
-import paho.mqtt.client as mqtt
+import hmac, hashlib, uuid
+SECRET_KEY = b"aerospace_secure_key_2026"
 
-client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2, client_id="SmartTool_Drill")
-client.connect("127.0.0.1", 1883)
+def generate_signature(thrust, torque, status, tx_id):
+    data_string = f"{thrust}_{torque}_{status}_{tx_id}"
+    return hmac.new(SECRET_KEY, data_string.encode(), hashlib.sha256).hexdigest()
 
-while True:
-    thrust = random.uniform(200, 500)
-    if random.random() < 0.30:
-        torque, status = thrust * 0.10, "FAIL"
-    else:
-        torque, status = (thrust * 0.45) + random.uniform(-2, 2), "PASS"
-        
-    payload = {"Thrust": thrust, "Torque": torque, "Status": status}
-    client.publish("aerospace/assembly/telemetry", json.dumps(payload))
-    time.sleep(1)
+# Inside while loop:
+tx_id = str(uuid.uuid4())
+signature = generate_signature(thrust, torque, status, tx_id)
+payload = {
+    "Transaction_ID": tx_id,
+    "Thrust": thrust, 
+    "Torque": torque, 
+    "Status": status,
+    "Signature": signature
+}
