@@ -1,0 +1,27 @@
+@startuml
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam activity {
+    BackgroundColor #F8F9FA
+    BorderColor #333333
+}
+
+title MITRE-Aligned Attack Graph 2: Airbus Insider Threat (Key Compromise)
+
+start
+:Initial Access: Malicious insider steals Airbus Secret HMAC Key;
+:Execution: Intercepts 'FAIL' telemetry (e.g., Thrust: 350, Torque: 35);
+:Defense Evasion: Generates new UUID to bypass Layer 1 Replay Detector;
+:Defense Evasion: Uses stolen key to forge valid HMAC signature;
+:Action on Objectives: Injects spoofed 'PASS' payload into MES logging stream;
+
+note right
+  **Detection Control:** 
+  Layer 3 ML Isolation Forest flags the 
+  data as mathematically unnatural 
+  (A thrust of 350 should yield a torque 
+  of ~157, not 35).
+end note
+
+stop
+@enduml
