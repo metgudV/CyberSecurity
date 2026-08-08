@@ -1,0 +1,25 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+LAYOUT_WITH_LEGEND()
+
+title C4 Level 2 Container Diagram: Aerospace Telemetry Defense Platform
+
+Person(qaEngineer, "QA & Security Engineer")
+
+System_Boundary(platformBoundary, "Aerospace Telemetry Defense Platform") {
+    Container(edgeGateway, "Smart Tool Edge Gateway", "Python", "Generates UUIDs and HMAC-SHA256 signatures for tool telemetry.")
+    Container(mqttBroker, "Industrial Message Broker", "amqtt (Python)", "High-throughput message queue routing telemetry topics.")
+    Container(dashboard, "Live Defense Dashboard", "Python / Streamlit", "Web app displaying live SOC metrics and validated telemetry.")
+    Container(mlEngine, "ML Detection Engine", "Scikit-Learn (Isolation Forest)", "Analyzes telemetry physics (Thrust/Torque correlation) to detect anomalies.")
+}
+
+System_Ext(smartTools, "Physical Drilling Units", "Hardware")
+System_Ext(attacker, "Compromised Maintenance Laptop", "Adversary")
+
+Rel(smartTools, edgeGateway, "Hardware signals", "GPIO / Serial")
+Rel(edgeGateway, mqttBroker, "Publishes signed telemetry", "MQTT (Port 1883)")
+Rel(attacker, mqttBroker, "Injects spoofed/replayed telemetry", "MQTT (Port 1883)")
+Rel(mqttBroker, dashboard, "Subscribes to live feed", "MQTT")
+Rel(dashboard, mlEngine, "Requests physics validation", "In-memory function call")
+Rel(qaEngineer, dashboard, "Views SOC alerts", "HTTP (Port 8501)")
+@enduml
