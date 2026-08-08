@@ -1,0 +1,25 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
+LAYOUT_WITH_LEGEND()
+
+title C4 Level 3 Component Diagram: Live Defense Dashboard Container
+
+Container_Boundary(dashboard, "Live Defense Dashboard (Streamlit Web App)") {
+    Component(mqttSub, "MQTT Subscriber", "paho-mqtt", "Listens for incoming telemetry payloads on the local network.")
+    Component(replayDetector, "Replay Detector", "Python Set", "Validates Transaction_ID (UUID) against historical states to block replays.")
+    Component(cryptoVerifier, "Cryptographic Verifier", "hmac / hashlib", "Validates the HMAC-SHA256 signature using the shared secret key.")
+    Component(physicsValidator, "ML Anomaly Detector", "Scikit-Learn", "Runs the Isolation Forest model to ensure Thrust/Torque ratio is mathematically natural.")
+    Component(uiRenderer, "Alerting Engine & UI", "Streamlit", "Renders the color-coded SOC grid and threat mitigation counters.")
+}
+
+Container(mqttBroker, "Message Broker", "amqtt")
+
+Rel(mqttBroker, mqttSub, "Pushes JSON telemetry")
+Rel(mqttSub, replayDetector, "Passes payload for Layer 1 Check")
+Rel(replayDetector, cryptoVerifier, "Passes payload for Layer 2 Check (if unique)")
+Rel(cryptoVerifier, physicsValidator, "Passes payload for Layer 3 Check (if signature matches)")
+Rel(physicsValidator, uiRenderer, "Returns threat classification (SAFE / COMPROMISED)")
+Rel(replayDetector, uiRenderer, "Flags REPLAY attack")
+Rel(cryptoVerifier, uiRenderer, "Flags TAMPER attack")
+
+@enduml
