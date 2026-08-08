@@ -1,25 +1,25 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
-LAYOUT_WITH_LEGEND()
 
-title C4 Level 3 Component Diagram: Live Defense Dashboard Container
+title C4 Level 3 Component Diagram: Airbus Live Defense Dashboard
 
-Container_Boundary(dashboard, "Live Defense Dashboard (Streamlit Web App)") {
-    Component(mqttSub, "MQTT Subscriber", "paho-mqtt", "Listens for incoming telemetry payloads on the local network.")
-    Component(replayDetector, "Replay Detector", "Python Set", "Validates Transaction_ID (UUID) against historical states to block replays.")
-    Component(cryptoVerifier, "Cryptographic Verifier", "hmac / hashlib", "Validates the HMAC-SHA256 signature using the shared secret key.")
-    Component(physicsValidator, "ML Anomaly Detector", "Scikit-Learn", "Runs the Isolation Forest model to ensure Thrust/Torque ratio is mathematically natural.")
-    Component(uiRenderer, "Alerting Engine & UI", "Streamlit", "Renders the color-coded SOC grid and threat mitigation counters.")
+Container_Boundary(dashboard, "Airbus Live Defense Dashboard Container") {
+    Component(mqttSub, "MQTT Subscriber", "paho-mqtt", "Ingests raw telemetry payloads from the industrial network.")
+    Component(replayDetector, "Layer 1: Replay Detector", "Python Set", "Validates UUID Transaction IDs. Drops duplicate 'PASS' replays.")
+    Component(cryptoVerifier, "Layer 2: Crypto Verifier", "hmac/hashlib", "Validates HMAC-SHA256 signature via Airbus Secret Key.")
+    Component(physicsValidator, "Layer 3: ML Anomaly Detector", "Isolation Forest", "Validates Thrust/Torque ratio to detect physical spoofing.")
+    Component(uiRenderer, "Layer 4: Alerting Engine", "Streamlit", "Renders the SOC grid and live threat metrics for QA.")
 }
 
-Container(mqttBroker, "Message Broker", "amqtt")
+Container(mqttBroker, "Airbus Message Broker", "amqtt")
+Person(qaEngineer, "Airbus QA Engineer")
 
-Rel(mqttBroker, mqttSub, "Pushes JSON telemetry")
-Rel(mqttSub, replayDetector, "Passes payload for Layer 1 Check")
-Rel(replayDetector, cryptoVerifier, "Passes payload for Layer 2 Check (if unique)")
-Rel(cryptoVerifier, physicsValidator, "Passes payload for Layer 3 Check (if signature matches)")
-Rel(physicsValidator, uiRenderer, "Returns threat classification (SAFE / COMPROMISED)")
-Rel(replayDetector, uiRenderer, "Flags REPLAY attack")
-Rel(cryptoVerifier, uiRenderer, "Flags TAMPER attack")
+Rel(mqttBroker, mqttSub, "Pushes JSON telemetry", "TCP/IP")
+Rel(mqttSub, replayDetector, "Passes payload")
+Rel(replayDetector, cryptoVerifier, "Forwards unique payloads")
+Rel(cryptoVerifier, physicsValidator, "Forwards authenticated payloads")
+Rel(physicsValidator, uiRenderer, "Returns classification (SAFE/COMPROMISED)")
+Rel(qaEngineer, uiRenderer, "Views Dashboard", "HTTPS")
 
+SHOW_LEGEND()
 @enduml
