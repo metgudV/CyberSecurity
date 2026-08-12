@@ -22,7 +22,7 @@ Telemetry traveling over local industrial networks over unencrypted MQTT topics 
 This project implements a multi-layered **Defense-in-Depth Architecture** that combines:
 1. **Cryptographic Telemetry Signing (HMAC-SHA256):** Provides mathematical payload integrity and origin authenticity at the edge.
 2. **Replay Attack Protection (UUID Nonces):** Rejects duplicate or stale telemetry injections.
-3. **Unsupervised Machine Learning IDS (Isolation Forest):** Evaluates mathematical correlations between Thrust and Torque curves to catch insider threats or key compromises[cite: 1, 2].
+3. **Unsupervised Machine Learning IDS (Isolation Forest):** Evaluates mathematical correlations between Thrust and Torque curves to catch insider threats or key compromises.
 4. **Live Defense Dashboard (Streamlit):** Real-time Security Operations Center (SOC) console tracking live telemetry, flagging compromised data entries, and displaying active threat metrics.
 
 ---
