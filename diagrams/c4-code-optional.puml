@@ -1,0 +1,41 @@
+@startuml
+skinparam shadowing false
+skinparam classBackgroundColor #F8F9FA
+skinparam classBorderColor #333333
+
+title C4 Level 4 Code Diagram: Cryptographic & Replay Logic
+
+class TelemetryPayload {
+    +String tool_id
+    +Float thrust
+    +Float torque
+    +String uuid_nonce
+    +String hmac_signature
+    +toJSON(): String
+}
+
+class EdgeGatewaySigner {
+    -String enterprise_secret_key
+    +generate_uuid_nonce(): String
+    +calculate_hmac(payload: JSON): String
+    +publish_to_broker()
+}
+
+class DashboardSecurityPipeline {
+    -String enterprise_secret_key
+    -Set<String> processed_uuids
+    +enforce_replay_protection(uuid: String): Boolean
+    +verify_hmac_signature(payload: JSON, signature: String): Boolean
+    +run_ml_isolation_forest(thrust: Float, torque: Float): Boolean
+}
+
+EdgeGatewaySigner ..> TelemetryPayload : "Creates & Signs"
+DashboardSecurityPipeline ..> TelemetryPayload : "Parses & Validates"
+
+note right of DashboardSecurityPipeline
+  Pipeline strictly drops duplicate UUIDs 
+  before executing expensive HMAC hashing 
+  or ML processing to prevent DoS.
+end note
+
+@enduml
