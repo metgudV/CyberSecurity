@@ -10,6 +10,7 @@
 * **Selected System Name:** Aerospace Assembly Telemetry Platform
 * **System Type:** Simulated enterprise architecture
 
+
 * **Student Full Name:** Vijayalaxmi Metgud
 * **Student ID:** 2024AB12508
 * **Years of Professional Experience:** 7.5 years
@@ -142,6 +143,7 @@ Catastrophic safety failures, loss of life, EASA/FAA fleet groundings, extreme l
 ---
 
 ## B.4 Analyse - Gap Analysis and CVSS Risk Quantification
+* **CVSS Table available at:** risk/cvss-table.md
 
 ### Current State
 The native OPC UA smart tools stream unencrypted, unsigned JSON telemetry across the industrial network via a vulnerable MQTT broker.
@@ -157,6 +159,7 @@ Target architecture introduces an edge gateway to append UUIDs and HMAC signatur
 | **Insider Threat** | Implicit trust of signed data | Physics correlation validation | Deploy Isolation Forest ML model |
 
 ### Risk Register
+* **Full CSV available at:** `risk/risk-register.csv`
 | Risk ID | Threat | Asset | Impact | CVSS Score | Existing Control | Proposed Control | Residual Risk |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **R1** | MQTT Topic Spoofing (Tampering) | Telemetry Logging Pipeline | Critical | 9.3 (Critical) | None (Plaintext MQTT) | HMAC-SHA256 Edge Signing | Low |
