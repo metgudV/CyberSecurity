@@ -11,7 +11,7 @@
 * **System Selected:** Aerospace Drilling & Fastening Telemetry Data Pipeline
 * **System Type:** Industry 4.0 Simulated Architecture
   
-## 🔒 Confidentiality Statement
+## Confidentiality Statement
 This repository does not contain proprietary, sensitive, or confidential organizational information. All sensitive details have been anonymized, and the architecture represents a safe, academic simulation of an Industry 4.0 manufacturing environment.
 
 ---
@@ -29,7 +29,7 @@ This project implements a multi-layered **Defense-in-Depth Architecture** that c
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
 ```text
 ├── README.md                                # This detailed project overview
@@ -47,6 +47,7 @@ This project implements a multi-layered **Defense-in-Depth Architecture** that c
 │   └── risk-register.csv                    # Quantified Risk Register
 ├── scripts/
 │   ├── check_structure.py                   # Automated repo structure validation
+|   |── check_plantuml_files.py              # Automated plantuml files check
 │   ├── grade_report.py                      # Automated grading keyword check
 │   └── implementation/                      # Core Python Simulation Files
 │       ├── 1_generate_baseline.py           # Trains the ML Isolation Forest
@@ -57,7 +58,7 @@ This project implements a multi-layered **Defense-in-Depth Architecture** that c
 └── presentation/
     └── viva-presentation-outline.md         # Slide outline for Viva assessment
 ```
-🚀 How to Run the Simulation
+How to Run the Simulation
 If you wish to test the live Python implementation of the Defense-in-Depth pipeline, follow these steps using separate terminal windows:
 
 1. Start the MQTT Broker (Terminal 1):
