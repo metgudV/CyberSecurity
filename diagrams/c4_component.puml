@@ -1,18 +1,18 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
 
-title C4 Level 3 Component Diagram: Airbus Live Defense Dashboard
+title C4 Level 3 Component Diagram: Aerospace Final Assembly Line (FAL) Live Defense Dashboard
 
-Container_Boundary(dashboard, "Airbus Live Defense Dashboard Container") {
+Container_Boundary(dashboard, "Aerospace Final Assembly Line (FAL) Live Defense Dashboard Container") {
     Component(mqttSub, "MQTT Subscriber", "paho-mqtt", "Ingests raw telemetry payloads from the industrial network.")
     Component(replayDetector, "Layer 1: Replay Detector", "Python Set", "Validates UUID Transaction IDs. Drops duplicate 'PASS' replays.")
-    Component(cryptoVerifier, "Layer 2: Crypto Verifier", "hmac/hashlib", "Validates HMAC-SHA256 signature via Airbus Secret Key.")
+    Component(cryptoVerifier, "Layer 2: Crypto Verifier", "hmac/hashlib", "Validates HMAC-SHA256 signature via Commercial Aircraft Secret Key.")
     Component(physicsValidator, "Layer 3: ML Anomaly Detector", "Isolation Forest", "Validates Thrust/Torque ratio to detect physical spoofing.")
     Component(uiRenderer, "Layer 4: Alerting Engine", "Streamlit", "Renders the SOC grid and live threat metrics for QA.")
 }
 
-Container(mqttBroker, "Airbus Message Broker", "amqtt")
-Person(qaEngineer, "Airbus QA Engineer")
+Container(mqttBroker, "Commercial Aircraft Message Broker", "amqtt")
+Person(qaEngineer, "Commercial Aircraft QA Engineer")
 
 Rel(mqttBroker, mqttSub, "Pushes JSON telemetry", "TCP/IP")
 Rel(mqttSub, replayDetector, "Passes payload")
