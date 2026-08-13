@@ -57,6 +57,9 @@ This project implements a multi-layered **Defense-in-Depth Architecture** that c
 │       ├── 3_attacker.py                    # Threat emulator (Spoofing/Replay)
 │       └── 4_dashboard.py                   # Streamlit SOC Monitoring UI
 ├       └── requirements.txt                 # Python dependency specifications
+├── evidence/
+│   ├── assumptions.md                       # Documented assumptions and references
+│   └── screenshots.md                       # Proof of implementation and execution
 └── presentation/
     └── viva-presentation-outline.md         # Slide outline for Viva assessment
 ```
