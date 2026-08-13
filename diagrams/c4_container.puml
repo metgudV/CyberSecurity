@@ -1,18 +1,18 @@
 @startuml
 !include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
 
-title C4 Level 2 Container Diagram: Airbus Telemetry Defense Platform
+title C4 Level 2 Container Diagram: Aerospace Final Assembly Line (FAL) Telemetry Defense Platform
 
-Person(qaEngineer, "Airbus QA & Security Engineer")
+Person(qaEngineer, "QA & Security Engineer")
 
-System_Boundary(platformBoundary, "Airbus Telemetry Defense Platform") {
-    Container(edgeGateway, "Airbus Edge Gateway", "Python", "Generates UUID nonces and HMAC signatures for native OPC UA tool telemetry.")
+System_Boundary(platformBoundary, "Aerospace Final Assembly Line (FAL) Telemetry Defense Platform") {
+    Container(edgeGateway, "Commercial Aircraft Edge Gateway", "Python", "Generates UUID nonces and HMAC signatures for native OPC UA tool telemetry.")
     Container(mqttBroker, "Industrial Message Broker", "amqtt (Python)", "High-throughput message queue routing unencrypted telemetry topics.")
-    Container(dashboard, "Live Defense Dashboard", "Streamlit", "Airbus SOC Web App. Enforces Replay & Cryptographic validation.")
+    Container(dashboard, "Live Defense Dashboard", "Streamlit", "Commercial Aircraft SOC Web App. Enforces Replay & Cryptographic validation.")
     Container(mlEngine, "ML Detection Engine", "Scikit-Learn", "Unsupervised Isolation Forest catching unnatural mechanical correlations.")
 }
 
-System_Ext(smartTools, "Airbus Drilling Units", "Hardware")
+System_Ext(smartTools, "Commercial Aircraft Drilling Units", "Hardware")
 System_Ext(attacker, "Compromised Maintenance Laptop", "Adversary")
 
 Rel(smartTools, edgeGateway, "Native OPC UA signals", "OPC UA")
