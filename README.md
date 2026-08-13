@@ -40,6 +40,8 @@ This project implements a multi-layered **Defense-in-Depth Architecture** that c
 │   ├── c4-context.puml                      # C4 Level 1 System Context Diagram
 │   ├── c4-container.puml                    # C4 Level 2 Container Diagram
 │   ├── c4-component.puml                    # C4 Level 3 Component Diagram
+|   ├── c4-code-optional.puml                # C4 Level 4 Code Diagram for Security Logic (Optional)
+│   ├── did-architecture.puml                # Defense-in-Depth Architecture Diagram (Optional)
 │   ├── attack-graph-1.puml                  # MITRE-Aligned Threat 1 (Topic Spoofing)
 │   └── attack-graph-2.puml                  # MITRE-Aligned Threat 2 (Insider Threat)
 ├── risk/
