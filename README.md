@@ -53,6 +53,7 @@ This project implements a multi-layered **Defense-in-Depth Architecture** that c
 │       ├── 2_smart_tool.py                  # Simulates edge hardware & HMAC signing
 │       ├── 3_attacker.py                    # Threat emulator (Spoofing/Replay)
 │       └── 4_dashboard.py                   # Streamlit SOC Monitoring UI
+├       └── requirements.txt                 # Python dependency specifications
 └── presentation/
     └── viva-presentation-outline.md         # Slide outline for Viva assessment
 ```
@@ -85,5 +86,3 @@ python 3_attacker.py
 python 2_smart_tool.py
 ``` 
 View the live UI at http://localhost:8501 to watch the attacks get blocked in real-time!
-    ├── 4_dashboard.py            # Streamlit Live Defense Console & multi-layer detection pipeline
-    └── requirements.txt          # Python dependency specifications
