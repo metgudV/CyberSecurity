@@ -65,12 +65,9 @@ If you wish to test the live Python implementation of the Defense-in-Depth pipel
 ``` text
 amqtt
 ```
-``` text
-cd scripts/implementation/
-```
 2. Train the ML Model (Terminal 2):
 ``` text
-python 1_generate_baseline.py
+cd scripts/implementation/python 1_generate_baseline.py
 ```
 
 3. Launch the SOC Dashboard (Terminal 2):
@@ -80,11 +77,11 @@ streamlit run 4_dashboard.py
 
 4. Start the Attacker Script (Terminal 3):
 ``` text
-python 3_attacker.py
+cd scripts/implementation/python 3_attacker.py
 ```
 
 5. Start the Smart Tool Telemetry (Terminal 4):
 ``` text
-python 2_smart_tool.py
+cd scripts/implementation/python 2_smart_tool.py
 ``` 
 View the live UI at http://localhost:8501 to watch the attacks get blocked in real-time!
