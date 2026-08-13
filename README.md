@@ -65,10 +65,11 @@ If you wish to test the live Python implementation of the Defense-in-Depth pipel
 ``` text
 amqtt
 ```
-
-2. Train the ML Model (Terminal 2):
 ``` text
 cd scripts/implementation/
+```
+2. Train the ML Model (Terminal 2):
+``` text
 python 1_generate_baseline.py
 ```
 
