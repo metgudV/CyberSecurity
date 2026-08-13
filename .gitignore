@@ -1,0 +1,21 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Generated outputs
+*.tmp
+*.log
+
+# Sensitive files - do not commit
+.env
+*.key
+*.pem
+*.p12
+credentials.*
+secrets.*
