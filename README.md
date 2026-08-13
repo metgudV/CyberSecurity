@@ -10,7 +10,9 @@
 - Course: SS*ZG681 / SE*ZG681 Advanced Cyber Security
 * **System Selected:** Aerospace Drilling & Fastening Telemetry Data Pipeline
 * **System Type:** Industry 4.0 Simulated Architecture
-* **Confidentiality Statement:** This submission uses a realistic simulated enterprise architecture inspired by aerospace assembly telemetry. No proprietary or confidential organizational information is disclosed.
+  
+## 🔒 Confidentiality Statement
+This repository does not contain proprietary, sensitive, or confidential organizational information. All sensitive details have been anonymized, and the architecture represents a safe, academic simulation of an Industry 4.0 manufacturing environment.
 
 ---
 
@@ -27,23 +29,31 @@ This project implements a multi-layered **Defense-in-Depth Architecture** that c
 
 ---
 
-## Repository Structure
+## 📂 Repository Structure
 
 ```text
-aerospace-cybersecurity-assignment/
+├── README.md                                # This detailed project overview
 ├── report/
-│   ├── final-report.md       # Comprehensive security evaluation report
-│   └── final-report.pdf      # Compiled PDF report for LMS submission
-│
+│   ├── final-report.md                      # Markdown version of the engineering report
+│   └── final-report.pdf                     # Final PDF submission
 ├── diagrams/
-│   ├── c4-context.puml       # C4 Level 1 Context Diagram (PlantUML)
-│   ├── c4-container.puml     # C4 Level 2 Container Diagram (PlantUML)
-│   ├── c4-component.puml     # C4 Level 3 Component Diagram (PlantUML)
-│   ├── attack-graph-1.puml   # MITRE-aligned Topic Spoofing Attack Graph
-│   └── attack-graph-2.puml   # Defense-in-Depth Control Stack Diagram
-└── scripts/
-    ├── 1_generate_baseline.py    # Generates mechanical dataset & trains Isolation Forest ML model
-    ├── 2_smart_tool.py           # Simulates OPC UA smart tool & HMAC-signed MQTT publisher
-    ├── 3_attacker.py             # Threat emulation script (Tampering, Replays, Insider Spoofing)
+│   ├── c4-context.puml                      # C4 Level 1 System Context Diagram
+│   ├── c4-container.puml                    # C4 Level 2 Container Diagram
+│   ├── c4-component.puml                    # C4 Level 3 Component Diagram
+│   ├── attack-graph-1.puml                  # MITRE-Aligned Threat 1 (Topic Spoofing)
+│   └── attack-graph-2.puml                  # MITRE-Aligned Threat 2 (Insider Threat)
+├── risk/
+│   ├── cvss-table.md                        # CVSS v3.1 Scoring & Gap Analysis
+│   └── risk-register.csv                    # Quantified Risk Register
+├── scripts/
+│   ├── check_structure.py                   # Automated repo structure validation
+│   ├── grade_report.py                      # Automated grading keyword check
+│   └── implementation/                      # Core Python Simulation Files
+│       ├── 1_generate_baseline.py           # Trains the ML Isolation Forest
+│       ├── 2_smart_tool.py                  # Simulates edge hardware & HMAC signing
+│       ├── 3_attacker.py                    # Threat emulator (Spoofing/Replay)
+│       └── 4_dashboard.py                   # Streamlit SOC Monitoring UI
+└── presentation/
+    └── viva-presentation-outline.md         # Slide outline for Viva assessment
     ├── 4_dashboard.py            # Streamlit Live Defense Console & multi-layer detection pipeline
     └── requirements.txt          # Python dependency specifications
