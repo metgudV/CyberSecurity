@@ -1,0 +1,36 @@
+@startuml
+skinparam componentStyle rectangle
+skinparam shadowing false
+
+title Defense-in-Depth Control Stack: Aerospace Telemetry Platform
+
+package "Layer 1: Data & Cryptography" {
+    [HMAC-SHA256 Signing]
+    [UUID v4 Nonces]
+    [Enterprise KMS]
+}
+
+package "Layer 2: Network & Perimeter" {
+    [Factory VLAN Segmentation]
+    [IPv4 Strict Binding]
+    [TLS 1.3 in Transit]
+}
+
+package "Layer 3: Host & Application" {
+    [Layer 1 Replay Detector (Stateful)]
+    [Isolation Forest ML Engine]
+}
+
+package "Layer 4: Operations & SOC" {
+    [Streamlit SOC Dashboard]
+    [Immutable Audit Logs]
+    [Incident Response Runbooks]
+}
+
+[Threat Actor] --> [Factory VLAN Segmentation] : Initial Access Attempt
+[Factory VLAN Segmentation] --> [Layer 1 Replay Detector (Stateful)] : Traffic flows to App
+[Layer 1 Replay Detector (Stateful)] --> [HMAC-SHA256 Signing] : Unique payloads verified
+[HMAC-SHA256 Signing] --> [Isolation Forest ML Engine] : Authenticated payloads analyzed
+[Isolation Forest ML Engine] --> [Streamlit SOC Dashboard] : Anomalies flagged to SOC
+
+@enduml
