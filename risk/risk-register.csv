@@ -1,0 +1,4 @@
+RiskID,Threat,Asset,Impact,Likelihood,CVSS_Vector,CVSS_Score,Existing_Control,Proposed_Control,Residual_Risk
+R1,MQTT Topic Spoofing (Tampering),Telemetry Logging Pipeline,Critical,High,AV:A/AC:L/PR:N/UI:N/S:C/C:N/I:H/A:H,9.3,None (Plaintext MQTT),HMAC-SHA256 Edge Signing,Low
+R2,Replay Attack on QA Logs,Telemetry Logging Pipeline,High,Medium,AV:A/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N,6.5,None,Stateful UUID v4 Tracking,Low
+R3,Insider Key Compromise,Edge Gateway / KMS,Critical,Low,AV:A/AC:H/PR:H/UI:N/S:U/C:N/I:H/A:N,7.5,Traditional Cryptography,ML Isolation Forest Physics Check,Medium
