@@ -6,10 +6,10 @@ skinparam activity {
     BorderColor #333333
 }
 
-title MITRE-Aligned Attack Graph 2: Airbus Insider Threat (Key Compromise)
+title MITRE-Aligned Attack Graph 2: Aerospace Insider Threat (Key Compromise)
 
 start
-:Initial Access: Malicious insider steals Airbus Secret HMAC Key;
+:Initial Access: Malicious insider steals Aerospace Secret HMAC Key;
 :Execution: Intercepts 'FAIL' telemetry (e.g., Thrust: 350, Torque: 35);
 :Defense Evasion: Generates new UUID to bypass Layer 1 Replay Detector;
 :Defense Evasion: Uses stolen key to forge valid HMAC signature;
