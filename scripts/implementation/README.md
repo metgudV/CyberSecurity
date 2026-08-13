@@ -1,15 +1,15 @@
-# Implementation Scripts: Airbus Telemetry Defense Pipeline
+# Implementation Scripts: Aerospace Telemetry Defense Pipeline
 
-This folder contains the core Python implementation files for the Airbus A350 Final Assembly Line (FAL) Telemetry Defense Platform simulation. These scripts work together to simulate a live Industry 4.0 factory floor, execute MITRE-aligned cyberattacks, and defend against them using a Defense-in-Depth architecture (HMAC-SHA256, UUID Nonces, and ML).
+This folder contains the core Python implementation files for the Commercial Aircraft Final Assembly Line (FAL) Telemetry Defense Platform simulation. These scripts work together to simulate a live Industry 4.0 factory floor, execute MITRE-aligned cyberattacks, and defend against them using a Defense-in-Depth architecture (HMAC-SHA256, UUID Nonces, and ML).
 
 ## 📂 File Directory
 
 *   **`1_generate_baseline.py`**
     *   **Role:** Data Science & ML Training.
-    *   **Description:** Generates a synthetic dataset representing baseline mechanical physics (Thrust and Torque) for Airbus smart drills. It trains an Unsupervised Machine Learning model (Isolation Forest) and outputs `isolation_forest.pkl` for the dashboard to use.
+    *   **Description:** Generates a synthetic dataset representing baseline mechanical physics (Thrust and Torque) for aerospace smart drills. It trains an Unsupervised Machine Learning model (Isolation Forest) and outputs `isolation_forest.pkl` for the dashboard to use.
 *   **`2_smart_tool.py`**
     *   **Role:** Edge/IoT Simulator.
-    *   **Description:** Simulates an Airbus smart drilling unit. It generates high-frequency telemetry, appends unique UUID v4 transaction nonces, signs the payload using an HMAC-SHA256 secret key, and publishes the data to the local MQTT broker.
+    *   **Description:** Simulates a commercial aerospace smart drilling unit. It generates high-frequency telemetry, appends unique UUID v4 transaction nonces, signs the payload using an HMAC-SHA256 secret key, and publishes the data to the local MQTT broker.
 *   **`3_attacker.py`**
     *   **Role:** Threat Emulator.
     *   **Description:** Simulates a compromised maintenance laptop on the factory VLAN. It actively monitors the MQTT network for failing tool logs and launches three distinct attacks:
@@ -18,7 +18,7 @@ This folder contains the core Python implementation files for the Airbus A350 Fi
         3.  **Insider Threat:** Forges a valid signature for a spoofed payload using a stolen key (caught by ML Layer).
 *   **`4_dashboard.py`**
     *   **Role:** SOC Monitoring & Alerting.
-    *   **Description:** A Streamlit-based web application that acts as the Airbus Live Defense Dashboard. It subscribes to the MQTT broker and processes all incoming telemetry through a 3-layer security pipeline (Replay Check $\rightarrow$ Crypto Check $\rightarrow$ ML Anomaly Check) before rendering the results in a live UI grid.
+    *   **Description:** A Streamlit-based web application that acts as the Enterprise Live Defense Dashboard. It subscribes to the MQTT broker and processes all incoming telemetry through a 3-layer security pipeline (Replay Check -> Crypto Check -> ML Anomaly Check) before rendering the results in a live UI grid.
 
 ---
 
