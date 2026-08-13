@@ -59,27 +59,31 @@ This project implements a multi-layered **Defense-in-Depth Architecture** that c
 🚀 How to Run the Simulation
 If you wish to test the live Python implementation of the Defense-in-Depth pipeline, follow these steps using separate terminal windows:
 
-Start the MQTT Broker (Terminal 1):
-
-Bash
+1. Start the MQTT Broker (Terminal 1):
+``` text
 amqtt
-Train the ML Model (Terminal 2):
+```
 
-Bash
+2. Train the ML Model (Terminal 2):
+``` text
 cd scripts/implementation/
 python 1_generate_baseline.py
-Launch the SOC Dashboard (Terminal 2):
+```
 
-Bash
+3. Launch the SOC Dashboard (Terminal 2):
+``` text
 streamlit run 4_dashboard.py
-Start the Attacker Script (Terminal 3):
+```
 
-Bash
+4. Start the Attacker Script (Terminal 3):
+``` text
 python 3_attacker.py
-Start the Smart Tool Telemetry (Terminal 4):
+```
 
-Bash
+5. Start the Smart Tool Telemetry (Terminal 4):
+``` text
 python 2_smart_tool.py
+``` 
 View the live UI at http://localhost:8501 to watch the attacks get blocked in real-time!
     ├── 4_dashboard.py            # Streamlit Live Defense Console & multi-layer detection pipeline
     └── requirements.txt          # Python dependency specifications
