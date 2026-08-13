@@ -37,9 +37,9 @@ Aircraft section assembly on the FAL requires precision automated tools (e.g., s
 The system consists of physical smart tools generating native OPC UA telemetry on the factory floor. This data is bridged via an Edge Gateway to an unencrypted MQTT message broker for high-speed transmission. The Enterprise MES and a Python-based Streamlit Live Defense Dashboard subscribe to this broker to process the logs and run real-time Machine Learning anomaly detection algorithms.
 
 ### 3. C4 Diagrams
-* **System Context (Level 1):** `diagrams/c4-context.puml`
-* **Container (Level 2):** `diagrams/c4-container.puml`
-* **Component (Level 3):** `diagrams/c4-component.puml`
+* **C4 Context Diagram (Level 1):** `diagrams/c4-context.puml`
+* **C4 Container Diagram (Level 2):** `diagrams/c4-container.puml`
+* **C4 Component Diagram (Level 3):** `diagrams/c4-component.puml`
 
 ### 4. Data Flow Mapping
 | Source | Destination | Protocol | Data Type | Trust Boundary |
@@ -102,7 +102,7 @@ Catastrophic safety failures, loss of life, EASA/FAA fleet groundings, extreme l
 * **Objective:** Manipulation (fraudulently altering a failing tool log to bypass QA and meet production quotas).
 * **Attack Graph:** `diagrams/attack-graph-1.puml`
 * **Affected Assets:** Aerospace MQTT Broker, MES QA Logs, Streamlit Dashboard.
-* **Detection Opportunities:** Cryptographic signature mismatches; unexpected spikes in MQTT publishing rates.
+* **Detection Opportunities:** Cryptographic signature mismatches; unexpected spikes in MQTT publishing rates. Strict network segmentation is required to detect and prevent lateral movement from the factory floor to the Enterprise MES.
 * **Existing Weaknesses:** Legacy telemetry travels over local industrial networks completely unencrypted and unsigned.
 
 ### Threat Scenario 2: Insider Threat (Key Compromise)
