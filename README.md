@@ -55,5 +55,31 @@ This project implements a multi-layered **Defense-in-Depth Architecture** that c
 │       └── 4_dashboard.py                   # Streamlit SOC Monitoring UI
 └── presentation/
     └── viva-presentation-outline.md         # Slide outline for Viva assessment
+```
+🚀 How to Run the Simulation
+If you wish to test the live Python implementation of the Defense-in-Depth pipeline, follow these steps using separate terminal windows:
+
+Start the MQTT Broker (Terminal 1):
+
+Bash
+amqtt
+Train the ML Model (Terminal 2):
+
+Bash
+cd scripts/implementation/
+python 1_generate_baseline.py
+Launch the SOC Dashboard (Terminal 2):
+
+Bash
+streamlit run 4_dashboard.py
+Start the Attacker Script (Terminal 3):
+
+Bash
+python 3_attacker.py
+Start the Smart Tool Telemetry (Terminal 4):
+
+Bash
+python 2_smart_tool.py
+View the live UI at http://localhost:8501 to watch the attacks get blocked in real-time!
     ├── 4_dashboard.py            # Streamlit Live Defense Console & multi-layer detection pipeline
     └── requirements.txt          # Python dependency specifications
